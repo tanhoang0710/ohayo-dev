@@ -10,9 +10,12 @@ import {
 } from '@nestjs/common';
 import { UserDto } from './user.dto';
 import { plainToClass } from 'class-transformer';
+import { UserService } from './user.service';
 
 @Controller('users')
 export class UserController {
+  constructor(private readonly userService: UserService) {}
+
   @Get()
   getAllUsers() {
     return [
@@ -41,6 +44,7 @@ export class UserController {
       '🚀 ~ file: user.controller.ts:39 ~ UserController ~ createUser ~ userReal:',
       userReal,
     );
+    this.userService.create(user);
 
     return UserDto.plainToClass(user);
   }
