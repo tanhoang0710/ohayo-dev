@@ -3,28 +3,13 @@ import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { StoreModule } from 'src/store/store.module';
 
-const configFB = {
-  appId: 'fb001',
-  appSecret: '123',
-};
-
 @Module({
   imports: [
-    StoreModule.register({
-      dirName: 'store',
-      fileName: 'user.json',
+    StoreModule.forFeature({
+      filename: 'user.json',
     }),
   ],
   controllers: [UserController],
-  providers: [
-    {
-      provide: UserService,
-      useClass: UserService,
-    },
-    {
-      provide: 'APP_FACEBOOK',
-      useValue: configFB,
-    },
-  ],
+  providers: [UserService],
 })
 export class UserModule {}

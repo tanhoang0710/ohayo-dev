@@ -1,24 +1,18 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { StoreConfig } from './store.config';
 import * as fs from 'fs';
-
+import { StoreConfig } from './store.config';
 @Injectable()
 export class StoreService {
   constructor(
     @Inject('STORE_CONFIG') private readonly storeConfig: StoreConfig,
   ) {
-    if (!fs.existsSync(this.storeConfig.dirName)) {
-      fs.mkdirSync(this.storeConfig.dirName);
+    if (!fs.existsSync(this.storeConfig.dirname)) {
+      fs.mkdirSync(this.storeConfig.dirname);
     }
   }
-
   save(data: any): void {
-    console.log(
-      '🚀 ~ file: store.service.ts:16 ~ StoreService ~ save ~ data:',
-      data,
-    );
     fs.appendFileSync(
-      `${this.storeConfig.dirName}/${this.storeConfig.fileName}`,
+      `${this.storeConfig.dirname}/${this.storeConfig.filename}`,
       JSON.stringify(data),
     );
   }
