@@ -3,6 +3,7 @@ import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { StoreModule } from 'src/store/store.module';
 import { LoggerService } from 'src/logger/logger.service';
+import { SecurityService } from './security.service';
 
 @Module({
   imports: [
@@ -11,6 +12,6 @@ import { LoggerService } from 'src/logger/logger.service';
     }),
   ],
   controllers: [UserController],
-  providers: [UserService, LoggerService],
+  providers: [UserService, LoggerService, SecurityService],
 })
 export class UserModule {}
