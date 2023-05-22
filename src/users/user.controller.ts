@@ -11,10 +11,21 @@ import {
 import { UserDto } from './user.dto';
 import { plainToClass } from 'class-transformer';
 import { UserService } from './user.service';
+import { LoggerService } from 'src/logger/logger.service';
 
 @Controller('users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly loggerService: LoggerService,
+  ) {
+    console.log('1', loggerService === userService.getLogger());
+  }
+
+  @Get('logger')
+  test1() {
+    return this.loggerService.log();
+  }
 
   @Get()
   getAllUsers() {
