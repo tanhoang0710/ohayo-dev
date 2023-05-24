@@ -1,12 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { BaseEntity } from 'src/common/mysql/base.entity';
+import { Entity, Column } from 'typeorm';
 
 @Entity({
   name: 'users',
 })
-export class UserEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: number;
-
+export class UserEntity extends BaseEntity {
   @Column({ length: 50 })
   firstName: string;
 

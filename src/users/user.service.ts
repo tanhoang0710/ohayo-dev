@@ -3,19 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './user.entity';
 import { Repository } from 'typeorm';
 import { UserDto } from './user.dto';
-import { plainToInstance } from 'class-transformer';
+import { MysqlBaseService } from 'src/common/mysql/base.service';
 
 @Injectable()
-export class UserService {
+export class UserService extends MysqlBaseService<UserEntity, UserDto> {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-  ) {}
-
-  async save(user: UserDto): Promise<UserDto> {
-    const savedUser = await this.userRepository.save(user);
-    return plainToInstance(UserDto, savedUser, {
-      excludeExtraneousValues: true,
-    });
+  ) {
+    super(userRepository);
   }
 }
